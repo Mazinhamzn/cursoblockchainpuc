@@ -42,4 +42,11 @@ contract Locacao {
     valor = valor + valorDoAcrescimo;
 }
     
+    function aditamentoValorAluguel (uint256 valorCerto) public
+    {
+    // em relação ao aditamento do valor do aluguel, posso receber (1) a diferença do valor do aluguel (gasta muito gás para calcular), (2) o valor certo (gasta menos gás para calcular) ou (3) o percentual (sub)(gasta muito gás para calcular)
+    
+    valor = valorCerto;
+    
+        }
 }
