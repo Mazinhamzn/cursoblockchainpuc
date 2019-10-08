@@ -9,34 +9,37 @@ contract Locacao {
     uint256 private valor;
     uint256 constant numeroMaximoLegalDeAlugueisParaMulta = 3;
 
-    constructor (string memory Ze, string memory Lele, uint256 valorDoAluguel) public {
+    constructor (string memory nomeLocador, string memory nomeLocatario, uint256 valorDoAluguel) public {
     
-        locador = Ze;
-        locatario = Lele;
-        valorDoAluguel = 100;
+        locador = nomeLocador;
+        locatario = nomeLocatario;
+        valor = valorDoAluguel;
         }
         
-    function valorAtualDoAluguel () public view returns (uint256) {
+    function valorAtualDoAluguel () public view returns (uint256) 
+    {
         return valor;
-            }
+    }
             
    // function simulaMulta(uint256 mesesRestantes), uint256 totalMesesContrato) public view returns (uint256 valorMulta) {
         
     function simulaMulta(uint256 mesesRestantes, uint256 totalMesesContrato) public view returns (uint256 valorMulta) {
     
-    /*    
+    
         valorMulta = valor*numeroMaximoLegalDeAlugueisParaMulta;
         valorMulta = valorMulta/totalMesesContrato;
         valorMulta = valorMulta*mesesRestantes;
         
-        returns valorMulta
-    */
-    
-        valorMulta = valor*numeroMaximoLegalDeAlugueisParaMulta;
-        valorMulta = valorMulta/30;
-        valorMulta = valorMulta*3;
-        
         return valorMulta;
-    }
+    
+        }
+    
+    function reajustaAluguel (uint256 percentualReajuste) public {
+    uint256 valorDoAcrescimo = 0;
+    
+    valorDoAcrescimo = ((valor*percentualReajuste)/100);
+    
+    valor = valor + valorDoAcrescimo;
+}
     
 }
