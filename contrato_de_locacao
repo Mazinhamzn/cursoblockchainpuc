@@ -44,9 +44,33 @@ contract Locacao {
     
     function aditamentoValorAluguel (uint256 valorCerto) public
     {
-    // em relação ao aditamento do valor do aluguel, posso receber (1) a diferença do valor do aluguel (gasta muito gás para calcular), (2) o valor certo (gasta menos gás para calcular) ou (3) o percentual (sub)(gasta muito gás para calcular)
+    // em relação ao aditamento do valor do aluguel, posso receber (1) a diferença do valor do aluguel (gasta muito gás para calcular), (2) o valor certo (gasta menos gás para calcular) 
+    // ou (3) o percentual (sub)(gasta muito gás para calcular)
     
     valor = valorCerto;
     
+    // Abrir o Metamask antes, depois atualizar o Solidity, e no Deploy, ao linkar o MetaMask no Injected Web3, ao clicar em transact, vc assina eletronicamente, criando o hash 
+    // correspondente à transação, seja de implantação do contrato, seja de interação do contrato.
+            }
+            
+    // Condicionante
+    // if (valorMulta < 10)        
+    // { return 0;
+    // }
+    
+    function aplicaMulta(uint256 mesesRestantes, uint256 percentual) public
+    {
+        require (mesesRestantes<30, "Periodo de Contrato Inválido");
+        for (uint i=1; i<mesesRestantes; i++) {
+            valor = valor+((valor*percentual)/100);
         }
+        }
+    
+    // para X acontecer (no exemplo - aplicar multa), require significa uma condição precisa acontecer.
+    // For (coloca um valor inicial para a comparação e o índice, que neste caso começa no 1 (ou seja, primeiro mês); (após coloca a condicional, se meu índice for menor do que os meses restantes, 
+    // eu executarei o índice; o i ++ é um atalho para escrever menos, i++ é igual a i +1)
+    // Após as chaves {, coloca-se o valor, que é igual a valor multiplicado por (índice + 1);
+    // essa função fica em loop buscando a condição se satisfazer.
+    // na linha "for" acima, está sendo feita uma declaração de variável.
+    // se o require não for satisfeito, então apareceria uma informação indicando que o contrato não está válido.
 }
