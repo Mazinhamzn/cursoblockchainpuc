@@ -1,6 +1,8 @@
-pragma solidity 0.5.12;
+pragma solidity ^0.5.12;
 
 //teste de comentário que o compilador não vai ler usando barra/barra. 
+//Colocar o acento circunflexo antes da versão do solidity, significa que vc garante que o que vc fez funcionará em outras versões
+
 
 contract Locacao {
     
