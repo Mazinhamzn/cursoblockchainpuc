@@ -1,4 +1,4 @@
-pragma solidity 0.5.9;
+pragma solidity 0.5.12;
 
 contract ERC20Interface {
     function totalSupply() public view returns(uint amount);
@@ -48,9 +48,10 @@ contract TicketERC20 is ERC20Interface, Mortal {
     mapping (address=>mapping (address=>uint)) ownerAllowances;
 
 // pode ser que mais uma pessoa possa receber a procuração para operar o token.
+// mapping é como um array, mas o mapping é índice de qq formato, não necessariamente numérico.
 
     constructor() public {
-        myName = "EPD Creditos";
+        myName = "EPDCreditos";
         mySymbol = "EPDC2019";
         myTotalSupply = 1000000;
         decimals = 0;
@@ -110,16 +111,18 @@ contract TicketERC20 is ERC20Interface, Mortal {
         _;
     }
 
-// alguns marcos definidos para ver se tem saldo, se é permitido, e se o montante é válido.
+// alguns marcos definidos para ver se tem saldo (idem a verificar a ficha da pessoa - se tem saldo na conta), se é permitido, e se o montante é válido.
 
     modifier isAllowed(address spender, address tokenOwner, uint amount) {
         require (amount <= ownerAllowances[tokenOwner][spender]);
         _;
     }
 
+// aqui procura pelo dono do token (ownerAllowances), procura por quem será o "gastador" (spender) do token
+
     modifier tokenAmountValid(uint amount) {
         require(amount > 0);
         _;
     }
-
+//modifier é utilizado para fazer checagens, e vc aplica ela nas cláusulas. Dessa forma, vc escreve menos. Escreve modifier, depois o nome, e depois o parâmetro. Coloca o "_" que significa segue o jogo.
 }
