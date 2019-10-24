@@ -1,5 +1,9 @@
 pragma solidity 0.5.12;
 
+import "./teste.sol";
+
+//consigo importar de outro arquivo.
+
 contract ERC20Interface {
     function totalSupply() public view returns(uint amount);
     function balanceOf(address tokenOwner) public view returns(uint balance);
@@ -13,6 +17,8 @@ contract ERC20Interface {
     event Transfer(address from, address to, uint amount);
     event Approval(address tokenOwner, address spender, uint amount);
 }
+// esse ERC20Interface é um contrato somente com coordenadas, e ele não tem nenhuma função a ser executada
+// Ethereum Request for comment = ERC
 
 contract Owned {
     address payable contractOwner;
@@ -29,12 +35,13 @@ contract Owned {
 
 contract Mortal is Owned  {
     function kill() public {
-        if (msg.sender == contractOwner) {
+        require(msg.sender==contractOwner, "Only owner can destroy the contract"); {
             selfdestruct(contractOwner);
         }
     }
 }
 
+// o selfdestruct indica que o contrato não será mais válido.
 
 contract TicketERC20 is ERC20Interface, Mortal {
     string private myName;
@@ -43,6 +50,7 @@ contract TicketERC20 is ERC20Interface, Mortal {
     uint8 public decimals;
 
 // "is" significa que o contrato (TicketERC20) herda algo de outro contrato (ERC20Interface).
+// este TicketERC20 é o token
 
     mapping (address=>uint) balances;
     mapping (address=>mapping (address=>uint)) ownerAllowances;
