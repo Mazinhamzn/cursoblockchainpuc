@@ -1,12 +1,12 @@
- pragma solidity 0.5.12;
+  pragma solidity 0.5.12;
     
  contract Energia {
     
     address payable public consumidorEnergia;
     address payable public distribuidorEnergia;
-    uint256 private contaEnergia;
-    uint private medidaConsumokWh;
-    uint private consumoMensal;
+    uint256 public contaEnergia;
+    uint public medidaConsumokWh;
+    uint public consumoMensal;
     bool public pago;
   
     event pagamentoRealizado (uint valor);
@@ -43,7 +43,7 @@
     function pagamentocontaEnergia () public payable autorizadoPagamento {
         require(pago == false, "Pagamento não realizado");
         require(msg.value == contaEnergia, "Valor enviado inválido");
-        consumidorEnergia.transfer(address(this).balance);
+        distribuidorEnergia.transfer(address(this).balance);
     }
 
  }  
